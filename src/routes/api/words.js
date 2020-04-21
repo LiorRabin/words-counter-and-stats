@@ -25,9 +25,11 @@ router.post('/counter', async (req, res, next) => {
   res.send({ response: 'ok' })
 })
 
-router.get('/stats', async (req, res) => {
-  const { word } = req.query
+router.get('/stats/:word', async (req, res) => {
+  const { word } = req.params
+  logger.debug(`getting stats for "${word}"`)
   const count = await getWordCount(word)
+  logger.debug(`"${word}" count is ${count}`)
   res.send({ word, count })
 })
 
