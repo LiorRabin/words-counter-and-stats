@@ -12,6 +12,4 @@ redis.on('error', () => {
   logger.error('Disconnected from redis')
 })
 
-module.exports = {
-  redis
-}
+module.exports = redis
