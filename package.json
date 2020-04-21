@@ -7,7 +7,7 @@
     "dev": "nodemon ./src/app.js",
     "lint": "node_modules/.bin/standard",
     "lint-fix": "node_modules/.bin/standard --fix",
-    "docs": "node_modules/.bin/apidoc -c src/routes/api -i src/routes/api -o docs/api && node_modules/.bin/apidoc-markdown -p docs/api -o docs/api.md",
+    "docs": "node_modules/.bin/apidoc -c src/routes/api -i src/routes/api -o docs/",
     "start": "node ./src/app.js",
     "docker-start": "./scripts/docker-start.sh",
     "docker-stop": "./scripts/docker-stop.sh",
@@ -26,7 +26,6 @@
     "pino-pretty": "^4.0.0"
   },
   "devDependencies": {
-    "@rigwild/apidoc-markdown": "^5.0.0",
     "apidoc": "^0.20.1",
     "standard": "^14.3.3"
   },
