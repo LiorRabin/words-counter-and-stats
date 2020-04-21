@@ -4,6 +4,17 @@ const { logger } = require('../../services')
 const { countWordsInString, countWordsInFile, countWordsFromUrl, getWordCount } = require('../../handlers')
 const { INPUT_TYPES, ERRORS } = require('../../utils/constants')
 
+/**
+ * @api {post} /api/words/counter Counts number of appearences for each word in the input
+ * @apiName WordsCounter
+ * @apiGroup Words
+ * @apiDescription Counts number of appearences for each word in the input
+ *
+ * @apiParam {String} type "string", "file" or "url"
+ * @apiParam {String} value depending on the "type" param the relevant value (note: for "file" need full path)
+ *
+ * @apiSuccess {String} response "ok"
+ */
 router.post('/counter', async (req, res, next) => {
   const { type, value, caseSensitive } = req.body
   switch (type) {
@@ -25,6 +36,15 @@ router.post('/counter', async (req, res, next) => {
   res.send({ response: 'ok' })
 })
 
+/**
+ * @api {get} /api/words/stats/:word Get number of times a word appeared so far (in all previous inputs)
+ * @apiName WordsStats
+ * @apiGroup Words
+ * @apiDescription Get number of times a word appeared so far (in all previous inputs)
+ *
+ * @apiSuccess {String} word the input word checked
+ * @apiSuccess {Number} count the number of times the input word appeared so far
+ */
 router.get('/stats/:word', async (req, res) => {
   const { word } = req.params
   logger.debug(`getting stats for "${word}"`)
