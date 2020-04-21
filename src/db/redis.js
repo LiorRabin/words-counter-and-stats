@@ -1,7 +1,7 @@
 const { redis } = require('../services')
 
-const incrWordCount = async (word) => {
-  return redis.hincrby('words', word, 1)
+const incrWordCount = async (word, incr) => {
+  return redis.hincrby('words', word, incr)
 }
 
 const getWordStats = async (word) => {

@@ -8,9 +8,14 @@ const { incrWordCount, getWordStats } = require('../db')
 
 const countWordsInString = async (str, caseSensitive) => {
   const words = str.replace(/[^a-zA-Z ]/g, '').split(' ').filter(w => w.length)
-  await Promise.all(words.map(async word => {
+  const counter = {}
+  words.map(word => {
     word = caseSensitive ? word : word.toLowerCase()
-    await incrWordCount(word)
+    counter[word] = counter[word] || 0
+    counter[word]++
+  })
+  await Promise.all(Object.keys(counter).map(async word => {
+    await incrWordCount(word, counter[word])
   }))
   logger.trace('string processed')
 }
