@@ -1,0 +1,29 @@
+{
+  "name": "words-counter-and-stats",
+  "version": "1.0.0",
+  "description": "Words counter and statistics",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.js",
+    "lint": "node_modules/.bin/standard",
+    "lint-fix": "node_modules/.bin/standard --fix",
+    "start": "node ./src/app.js",
+    "docker-start": "./scripts/docker-start.sh",
+    "docker-stop": "./scripts/docker-stop.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "LiorRabin",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "ioredis": "^4.16.2",
+    "morgan": "^1.10.0",
+    "pino": "^6.2.0",
+    "pino-pretty": "^4.0.0"
+  },
+  "devDependencies": {
+    "standard": "^14.3.3"
+  }
+}

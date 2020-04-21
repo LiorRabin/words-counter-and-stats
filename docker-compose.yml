@@ -1,0 +1,40 @@
+version: '2.4'
+services:
+  app:
+    container_name: words-counter-and-stats-app
+    build: ./
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./:/app
+    links:
+      - redis
+    ports:
+      - 3000:${PORT}
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - REDIS_URL=${REDIS_URL}
+    command:
+      sh -c 'npm i && npm start'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "100"
+        compress: "true"
+  redis:
+    container_name: words-counter-and-stats-redis
+    image: redis:latest
+    restart: unless-stopped
+    volumes:
+      - ./data/redis:/data
+    hostname: redis
+    expose:
+      - 6379
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "100"
+        compress: "true"
