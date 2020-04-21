@@ -4,6 +4,7 @@ services:
     container_name: words-counter-and-stats-app
     build: ./
     restart: unless-stopped
+    mem_limit: 2gb
     env_file: .env
     volumes:
       - ./:/app

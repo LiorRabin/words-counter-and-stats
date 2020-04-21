@@ -8,7 +8,7 @@
     "lint": "node_modules/.bin/standard",
     "lint-fix": "node_modules/.bin/standard --fix",
     "docs": "node_modules/.bin/apidoc -c src/routes/api -i src/routes/api -o docs/",
-    "start": "node ./src/app.js",
+    "start": "node --max-old-space-size=2048 ./src/app.js",
     "docker-start": "./scripts/docker-start.sh",
     "docker-stop": "./scripts/docker-stop.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
