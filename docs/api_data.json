@@ -1,8 +1,8 @@
 [
   {
     "type": "post",
-    "url": "<BASE_URL>/api/words/counter",
-    "title": "",
+    "url": "/api/words/counter",
+    "title": "Counts number of appearences for each word in the input",
     "name": "WordsCounter",
     "group": "Words",
     "description": "<p>Counts number of appearences for each word in the input</p>",
@@ -44,14 +44,14 @@
     "groupTitle": "Words",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/api<BASE_URL>/api/words/counter"
+        "url": "http://localhost:3000/api/api/words/counter"
       }
     ]
   },
   {
     "type": "get",
-    "url": "<BASE_URL>/api/words/stats/:word",
-    "title": "",
+    "url": "/api/words/stats/:word",
+    "title": "Get number of times a word appeared so far (in all previous inputs)",
     "name": "WordsStats",
     "group": "Words",
     "description": "<p>Get number of times a word appeared so far (in all previous inputs)</p>",
@@ -80,7 +80,7 @@
     "groupTitle": "Words",
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/api<BASE_URL>/api/words/stats/:word"
+        "url": "http://localhost:3000/api/api/words/stats/:word"
       }
     ]
   }
