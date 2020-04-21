@@ -5,7 +5,7 @@ const { countWordsInString, countWordsInFile, countWordsFromUrl, getWordCount } 
 const { INPUT_TYPES, ERRORS } = require('../../utils/constants')
 
 /**
- * @api {post} /api/words/counter Counts number of appearences for each word in the input
+ * @api {post} <BASE_URL>/api/words/counter
  * @apiName WordsCounter
  * @apiGroup Words
  * @apiDescription Counts number of appearences for each word in the input
@@ -37,7 +37,7 @@ router.post('/counter', async (req, res, next) => {
 })
 
 /**
- * @api {get} /api/words/stats/:word Get number of times a word appeared so far (in all previous inputs)
+ * @api {get} <BASE_URL>/api/words/stats/:word
  * @apiName WordsStats
  * @apiGroup Words
  * @apiDescription Get number of times a word appeared so far (in all previous inputs)
