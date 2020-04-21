@@ -1,9 +1,10 @@
-const { createReadStream } = require('fs')
+const { existsSync, createReadStream } = require('fs')
 const { createInterface } = require('readline')
 const { once } = require('events')
 const axios = require('axios')
 
 const { logger } = require('../services')
+const { ERRORS } = require('../utils/constants')
 const db = require('../db')
 
 const countWordsInString = async (str, caseSensitive) => {
@@ -21,24 +22,39 @@ const countWordsInString = async (str, caseSensitive) => {
 }
 
 const countWordsInFile = async (path, caseSensitive) => {
-  const stream = createReadStream(path)
-  const rl = createInterface({ input: stream })
-  rl.on('line', function (line) {
-    countWordsInString(line, caseSensitive)
-  })
-  await once(rl, 'close')
-  logger.debug('file processed')
+  try {
+    if (existsSync(path)) {
+      const stream = createReadStream(path)
+      const rl = createInterface({ input: stream })
+      rl.on('line', function (line) {
+        countWordsInString(line, caseSensitive)
+      })
+      await once(rl, 'close')
+      logger.debug('file processed')
+    } else {
+      throw new Error(`${ERRORS.FILE_NOT_EXISTS} "${path}"`)
+    }
+  } catch (err) {
+    logger.warn(err)
+  }
 }
 
 const countWordsFromUrl = async (url, caseSensitive) => {
-  const response = await axios({ url, responseType: 'stream' })
-  const stream = response.data
-  const rl = createInterface({ input: stream })
-  rl.on('line', function (line) {
-    countWordsInString(line, caseSensitive)
-  })
-  await once(rl, 'close')
-  logger.debug('url processed')
+  try {
+    const response = await axios({ url, responseType: 'stream' })
+    if (!response || !response.data) {
+      throw new Error(`${ERRORS.NO_DATA_FROM_URL} "${url}"`)
+    }
+    const stream = response.data
+    const rl = createInterface({ input: stream })
+    rl.on('line', function (line) {
+      countWordsInString(line, caseSensitive)
+    })
+    await once(rl, 'close')
+    logger.debug('url processed')
+  } catch (err) {
+    logger.warn(err)
+  }
 }
 
 const getWordCount = async (word) => db.getWordCount(word)

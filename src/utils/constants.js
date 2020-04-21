@@ -5,6 +5,8 @@ module.exports = {
     URL: 'url'
   },
   ERRORS: {
-    UNKNOWN_INPUT_TYPE: 'unknown input type'
+    UNKNOWN_INPUT_TYPE: 'unknown input type',
+    FILE_NOT_EXISTS: 'file does not exists',
+    NO_DATA_FROM_URL: 'could not get data'
   }
 }
